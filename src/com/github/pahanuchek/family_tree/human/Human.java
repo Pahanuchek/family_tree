@@ -2,11 +2,13 @@ package com.github.pahanuchek.family_tree.human;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Human {
-    private long id;
+    private static long idPre = 1;
+    private  long id;
     private String name;
     private Gender gender;
     private LocalDate birthDay;
@@ -16,28 +18,34 @@ public class Human {
     private List<Human> children;
 
     public Human(String name, Gender gender, LocalDate birthDay, LocalDate deadDay,
-                 Human father, Human mother, List<Human> children) {
-        this.id = 0;
+                 Human father, Human mother) {
+        this.id = idPre++;
         this.name = name;
         this.gender = gender;
         this.birthDay = birthDay;
         this.deadDay = deadDay;
         this.father = father;
         this.mother = mother;
-        this.children = children;
+        this.children = new ArrayList<>();
     }
 
     public Human(String name, Gender gender, LocalDate birthday, LocalDate deadDay) {
-        this(name, gender, birthday, deadDay, null, null, null);
+        this(name, gender, birthday, deadDay, null, null);
     }
 
     public Human(String name, Gender gender, LocalDate birthday) {
-        this(name, gender, birthday, null, null, null, null);
+        this(name, gender, birthday, null, null, null);
+    }
+    public Human(String name, Gender gender, LocalDate birthday, Human parent) {
+        this(name, gender, birthday, null, null, null);
+        addParents(parent);
     }
 
     public Human(String name, Gender gender, LocalDate birthday, Human father, Human mother) {
-        this(name, gender, birthday, null, father, mother, null);
+        this(name, gender, birthday, null, father, mother);
     }
+
+    public long getId() { return id; }
 
     public String getName() {
         return name;
@@ -96,8 +104,9 @@ public class Human {
     }
 
     public boolean addChildren(Human child) {
-        if (!children.isEmpty()) {
+        if (child != null) {
             children.add(child);
+            child.addParents(this);
             return true;
         } else {
             for(Human childrenReal: children) {
@@ -145,6 +154,7 @@ public class Human {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
+        result.append("Id: " + id + ". ");
         result.append("My name is " + this.name + ". ");
         result.append("I'm " + this.getAge(this.birthDay, this.deadDay) + " years old. ");
         if (this.father == null && this.mother != null) {
@@ -154,16 +164,17 @@ public class Human {
         } else if (this.father != null && this.mother != null) {
             result.append("My parents' names are " + father.getName() + " dad and " + mother.getName() + " mom. ");
         }
-        if (!children.isEmpty()) {
+        if (children != null && !children.isEmpty()) {
             if (children.size() == 1) {
                 result.append("My children name is " + children.get(0).getName() + ". ");
             } else {
                 result.append("My children's names are ");
                 for (Human child : children) {
-                    if (child.equals(children.get(children.size()))) {
+                    if (child.equals(children.get(children.size() - 1))) {
                         result.append(child.getName() + ". ");
+                    } else {
+                        result.append(child.getName() + ", ");
                     }
-                    result.append(child.getName() + ", ");
                 }
             }
         }
