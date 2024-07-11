@@ -25,19 +25,19 @@ public class FamilyTree implements Serializable {
         }
     }
 
-    public void searchAndAddChildrenFather(Human human) {
+    private void searchAndAddChildrenFather(Human human) {
         if (human.getFather() != null) {
             human.getFather().addChildren(human);
         }
     }
 
-    public void searchAndAddChildrenMother(Human human) {
+    private void searchAndAddChildrenMother(Human human) {
         if (human.getMother() != null) {
             human.getMother().addChildren(human);
         }
     }
 
-    public void searchAndAddParentChildren(Human human) {
+    private void searchAndAddParentChildren(Human human) {
         if (human.getChildren() != null && human.getChildren().isEmpty()) {
             for (Human child: human.getChildren()) {
                 child.addParents(human);
