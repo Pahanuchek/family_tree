@@ -2,10 +2,11 @@ package com.github.pahanuchek.family_tree.family_tree;
 
 import com.github.pahanuchek.family_tree.human.Human;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Long> checkHumanId;
     private List<Human> listHumans;
 
