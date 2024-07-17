@@ -1,4 +1,7 @@
-package com.github.pahanuchek.family_tree.human;
+package com.github.pahanuchek.family_tree.builder;
+
+import com.github.pahanuchek.family_tree.human.Gender;
+import com.github.pahanuchek.family_tree.human.Human;
 
 import java.time.LocalDate;
 
@@ -6,7 +9,7 @@ public class HumanBuilder {
     private int checkId;
 
     public Human build(String name, Gender gender, LocalDate birthDay, LocalDate deadDay,
-                         Human father, Human mother) {
+                       Human father, Human mother) {
         return new Human(checkId++, name, gender, birthDay, deadDay, father, mother);
     }
 

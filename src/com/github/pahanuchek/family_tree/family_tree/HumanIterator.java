@@ -1,4 +1,6 @@
-package com.github.pahanuchek.family_tree.human;
+package com.github.pahanuchek.family_tree.family_tree;
+
+import com.github.pahanuchek.family_tree.human.Human;
 
 import java.util.Iterator;
 import java.util.List;

@@ -1,7 +1,6 @@
 package com.github.pahanuchek.family_tree.family_tree;
 
 import com.github.pahanuchek.family_tree.human.Human;
-import com.github.pahanuchek.family_tree.human.HumanIterator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
