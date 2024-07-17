@@ -13,9 +13,16 @@ public class Main {
         Human svetlana = service.createHumanAndAddInTree("Светлана", Gender.Male, LocalDate.of(1970, 12, 11));
         Human pavel = service.createHumanAndAddInTree("Павел", Gender.Female, LocalDate.of(1993, 12, 24), yuriy, svetlana);
         service.printTree();
-        service.writeTreeInTheFile();
+//        service.writeTreeInTheFile();
 //        service.readTreeFromFile();
 //        service.printTree();
-        System.out.println(service.searchHumanInTree(0));
+//        System.out.println(service.searchHumanInTree(0));
+        service.sortTreeByName();
+        service.printTree();
+        service.sortTreeById();
+        service.printTree();
+        service.sortTreeByAge();
+        service.printTree();
+
     }
 }

@@ -66,4 +66,16 @@ public class Service {
     public void printTree() {
         System.out.println(familyTree);
     }
+
+    public void sortTreeByName() {
+        familyTree.sortByName();
+    }
+
+    public void sortTreeByAge() {
+        familyTree.sortByAge();
+    }
+
+    public void sortTreeById() {
+        familyTree.sortById();
+    }
 }

@@ -1,6 +1,9 @@
 package com.github.pahanuchek.family_tree.family_tree;
 
 import com.github.pahanuchek.family_tree.human.Human;
+import com.github.pahanuchek.family_tree.human.comparators.HumanComparatorByAge;
+import com.github.pahanuchek.family_tree.human.comparators.HumanComparatorById;
+import com.github.pahanuchek.family_tree.human.comparators.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Long> checkHumanId;
+    private List<Integer> checkHumanId;
     private List<Human> listHumans;
 
     public FamilyTree() {
@@ -27,7 +30,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     public Human searchHuman(int id) {
-        if (checkHumanId.contains((long) id)) {
+        if (checkHumanId.contains(id)) {
             for (Human human: listHumans) {
                 if (human.getId() == id) {
                     return  human;
@@ -70,5 +73,17 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     @Override
     public Iterator<Human> iterator() {
         return new HumanIterator(listHumans);
+    }
+
+    public void sortByName() {
+        listHumans.sort(new HumanComparatorByName());
+    }
+
+    public void sortByAge() {
+        listHumans.sort(new HumanComparatorByAge());
+    }
+
+    public void sortById() {
+        listHumans.sort(new HumanComparatorById());
     }
 }

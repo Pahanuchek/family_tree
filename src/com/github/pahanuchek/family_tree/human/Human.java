@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Human implements Serializable {
-    private  long id;
+    private  int id;
     private String name;
     private Gender gender;
     private LocalDate birthDay;
@@ -45,7 +45,7 @@ public class Human implements Serializable {
         this(id, name, gender, birthDay, null, father, mother);
     }
 
-    public long getId() { return id; }
+    public int getId() { return id; }
 
     public String getName() {
         return name;
@@ -130,7 +130,7 @@ public class Human implements Serializable {
         return false;
     }
 
-    public int getAge(LocalDate birthDay, LocalDate deadDay) {
+    public int getAge() {
         if (deadDay == null) {
             return Period.between(birthDay, LocalDate.now()).getYears();
         } else {
@@ -156,7 +156,7 @@ public class Human implements Serializable {
         StringBuilder result = new StringBuilder();
         result.append("Id: " + id + ". ");
         result.append("My name is " + this.name + ". ");
-        result.append("I'm " + this.getAge(this.birthDay, this.deadDay) + " years old. ");
+        result.append("I'm " + this.getAge() + " years old. ");
         if (this.father == null && this.mother != null) {
             result.append("My mother's name is " + mother.getName() + ". ");
         } else if (this.father != null && this.mother == null) {
@@ -180,5 +180,6 @@ public class Human implements Serializable {
         }
         return result.toString();
     }
+
 }
 
