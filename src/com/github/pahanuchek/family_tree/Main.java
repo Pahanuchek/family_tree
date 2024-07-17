@@ -49,6 +49,10 @@ public class Main {
         System.out.println(family);
 
         System.out.println(family.searchHuman(7));
+
+        for (Human human: family) {
+            System.out.println(human);
+        }
 //
 //        Writer fw = new FileHandler();
 //        fw.writeDoc(family);

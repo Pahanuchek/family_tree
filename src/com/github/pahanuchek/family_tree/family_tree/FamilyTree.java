@@ -1,12 +1,14 @@
 package com.github.pahanuchek.family_tree.family_tree;
 
 import com.github.pahanuchek.family_tree.human.Human;
+import com.github.pahanuchek.family_tree.human.HumanIterator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Long> checkHumanId;
     private List<Human> listHumans;
 
@@ -64,5 +66,10 @@ public class FamilyTree implements Serializable {
             result.append(human + "\n");
         }
         return result.toString();
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(listHumans);
     }
 }
