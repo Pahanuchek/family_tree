@@ -28,7 +28,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     public Human searchHuman(int id) {
-        if (!checkHumanId.contains(id)) {
+        if (!checkHumanId.contains((long) id)) {
             for (Human human: listHumans) {
                 if (human.getId() == id) {
                     return  human;

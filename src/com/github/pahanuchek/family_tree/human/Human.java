@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Human implements Serializable {
-    private static long idPre = 1;
     private  long id;
     private String name;
     private Gender gender;
@@ -18,9 +17,9 @@ public class Human implements Serializable {
     private Human mother;
     private List<Human> children;
 
-    public Human(String name, Gender gender, LocalDate birthDay, LocalDate deadDay,
+    public Human(int id, String name, Gender gender, LocalDate birthDay, LocalDate deadDay,
                  Human father, Human mother) {
-        this.id = idPre++;
+        this.id = id;
         this.name = name;
         this.gender = gender;
         this.birthDay = birthDay;
@@ -30,20 +29,20 @@ public class Human implements Serializable {
         this.children = new ArrayList<>();
     }
 
-    public Human(String name, Gender gender, LocalDate birthday, LocalDate deadDay) {
-        this(name, gender, birthday, deadDay, null, null);
+    public Human(int id, String name, Gender gender, LocalDate birthDay, LocalDate deadDay) {
+        this(id, name, gender, birthDay, deadDay, null, null);
     }
 
-    public Human(String name, Gender gender, LocalDate birthday) {
-        this(name, gender, birthday, null, null, null);
+    public Human(int id, String name, Gender gender, LocalDate birthDay) {
+        this(id, name, gender, birthDay, null, null, null);
     }
-    public Human(String name, Gender gender, LocalDate birthday, Human parent) {
-        this(name, gender, birthday, null, null, null);
+    public Human(int id, String name, Gender gender, LocalDate birthDay, Human parent) {
+        this(id, name, gender, birthDay, null, null, null);
         addParents(parent);
     }
 
-    public Human(String name, Gender gender, LocalDate birthday, Human father, Human mother) {
-        this(name, gender, birthday, null, father, mother);
+    public Human(int id, String name, Gender gender, LocalDate birthDay, Human father, Human mother) {
+        this(id, name, gender, birthDay, null, father, mother);
     }
 
     public long getId() { return id; }
