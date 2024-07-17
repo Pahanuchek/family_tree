@@ -47,6 +47,8 @@ public class Main {
         family.addHuman(anastasiya);
 
         System.out.println(family);
+
+        System.out.println(family.searchHuman(7));
 //
 //        Writer fw = new FileHandler();
 //        fw.writeDoc(family);

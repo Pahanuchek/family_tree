@@ -163,7 +163,7 @@ public class Human implements Serializable {
         } else if (this.father != null && this.mother == null) {
             result.append("My dad's name is " + father.getName() + ". ");
         } else if (this.father != null && this.mother != null) {
-            result.append("My parents' names are " + father.getName() + " dad and " + mother.getName() + " mom. ");
+            result.append("My parent's names are " + father.getName() + " dad and " + mother.getName() + " mom. ");
         }
         if (children != null && !children.isEmpty()) {
             if (children.size() == 1) {

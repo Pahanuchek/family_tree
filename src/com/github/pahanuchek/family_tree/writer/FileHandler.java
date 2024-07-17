@@ -7,10 +7,7 @@ public class FileHandler implements Writer {
     public void writeDoc(Object object) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream("person.out"));) {
-
             objectOutputStream.writeObject(object);
-            objectOutputStream.writeObject(object);
-
         } catch (IOException e) {
             System.out.println(e);
         }

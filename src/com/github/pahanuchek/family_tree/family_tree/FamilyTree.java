@@ -25,6 +25,17 @@ public class FamilyTree implements Serializable {
         }
     }
 
+    public Human searchHuman(int id) {
+        if (!checkHumanId.contains(id)) {
+            for (Human human: listHumans) {
+                if (human.getId() == id) {
+                    return  human;
+                }
+            }
+        }
+        return null;
+    }
+
     private void searchAndAddChildrenFather(Human human) {
         if (human.getFather() != null) {
             human.getFather().addChildren(human);
