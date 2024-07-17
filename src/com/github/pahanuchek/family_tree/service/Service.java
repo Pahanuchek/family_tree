@@ -19,25 +19,35 @@ public class Service {
         this.fileHandler = new FileHandler();
     }
 
-    public void createHumanAndAddInTree(String name, Gender gender, LocalDate birthDay, LocalDate deadDay,
+    public Human createHumanAndAddInTree(String name, Gender gender, LocalDate birthDay, LocalDate deadDay,
                                         Human father, Human mother) {
-        familyTree.addHuman(humanBuilder.build(name, gender, birthDay, deadDay, father, mother));
+        Human human = humanBuilder.build(name, gender, birthDay, deadDay, father, mother);
+        familyTree.addHuman(human);
+        return human;
     }
 
-    public void createHumanAndAddInTree(String name, Gender gender, LocalDate birthDay, LocalDate deadDay) {
-        familyTree.addHuman(humanBuilder.build(name, gender, birthDay, deadDay));
+    public Human createHumanAndAddInTree(String name, Gender gender, LocalDate birthDay, LocalDate deadDay) {
+        Human human = humanBuilder.build(name, gender, birthDay, deadDay);
+        familyTree.addHuman(human);
+        return human;
     }
 
-    public void createHumanAndAddInTree(String name, Gender gender, LocalDate birthDay) {
-        familyTree.addHuman(humanBuilder.build(name, gender, birthDay));
+    public Human createHumanAndAddInTree(String name, Gender gender, LocalDate birthDay) {
+        Human human = humanBuilder.build(name, gender, birthDay);
+        familyTree.addHuman(human);
+        return human;
     }
 
-    public void createHumanAndAddInTree(String name, Gender gender, LocalDate birthDay, Human parent) {
-        familyTree.addHuman(humanBuilder.build(name, gender, birthDay, parent));
+    public Human createHumanAndAddInTree(String name, Gender gender, LocalDate birthDay, Human parent) {
+        Human human = humanBuilder.build(name, gender, birthDay, parent);
+        familyTree.addHuman(human);
+        return human;
     }
 
-    public void createHumanAndAddInTree(String name, Gender gender, LocalDate birthDay, Human father, Human mother) {
-        familyTree.addHuman(humanBuilder.build(name, gender, birthDay, father, mother));
+    public Human createHumanAndAddInTree(String name, Gender gender, LocalDate birthDay, Human father, Human mother) {
+        Human human = humanBuilder.build(name, gender, birthDay, father, mother);
+        familyTree.addHuman(human);
+        return human;
     }
 
     public Human searchHumanInTree(int id) {
@@ -49,7 +59,11 @@ public class Service {
         fileHandler.writeDoc(familyTree);
     }
 
-    public Object readTreeFromFile() {
-        return fileHandler.readDoc();
+    public void readTreeFromFile() {
+        familyTree = (FamilyTree) fileHandler.readDoc();
+    }
+
+    public void printTree() {
+        System.out.println(familyTree);
     }
 }
