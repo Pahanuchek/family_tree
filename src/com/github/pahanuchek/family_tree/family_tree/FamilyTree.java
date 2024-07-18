@@ -10,52 +10,52 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
+public class FamilyTree<E extends ItemUser<E>> implements Serializable, Iterable<E> {
     private List<Integer> checkHumanId;
-    private List<Human> listHumans;
+    private List<E> listHumans;
 
     public FamilyTree() {
         this.listHumans = new ArrayList<>();
         this.checkHumanId = new ArrayList<>();
     }
 
-    public void addHuman(Human human) {
-        if (!checkHumanId.contains(human.getId())) {
-            checkHumanId.add(human.getId());
-            listHumans.add(human);
-            searchAndAddChildrenFather(human);
-            searchAndAddChildrenMother(human);
-            searchAndAddParentChildren(human);
+    public void addHuman(E e) {
+        if (!checkHumanId.contains(e.getId())) {
+            checkHumanId.add(e.getId());
+            listHumans.add(e);
+            searchAndAddChildrenFather(e);
+            searchAndAddChildrenMother(e);
+            searchAndAddParentChildren(e);
         }
     }
 
-    public Human searchHuman(int id) {
+    public E searchHuman(int id) {
         if (checkHumanId.contains(id)) {
-            for (Human human: listHumans) {
-                if (human.getId() == id) {
-                    return  human;
+            for (E e: listHumans) {
+                if (e.getId() == id) {
+                    return  e;
                 }
             }
         }
         return null;
     }
 
-    private void searchAndAddChildrenFather(Human human) {
-        if (human.getFather() != null) {
-            human.getFather().addChildren(human);
+    private void searchAndAddChildrenFather(E e) {
+        if (e.getFather() != null) {
+            e.getFather().addChildren(e);
         }
     }
 
-    private void searchAndAddChildrenMother(Human human) {
-        if (human.getMother() != null) {
-            human.getMother().addChildren(human);
+    private void searchAndAddChildrenMother(E e) {
+        if (e.getMother() != null) {
+            e.getMother().addChildren(e);
         }
     }
 
-    private void searchAndAddParentChildren(Human human) {
-        if (human.getChildren() != null && human.getChildren().isEmpty()) {
-            for (Human child: human.getChildren()) {
-                child.addParents(human);
+    private void searchAndAddParentChildren(E e) {
+        if (e.getChildren() != null && e.getChildren().isEmpty()) {
+            for (E child: e.getChildren()) {
+                child.addParents(e);
             }
         }
     }
@@ -64,26 +64,26 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append("There are " + listHumans.size() + " people in this family tree:\n");
-        for (Human human: listHumans) {
-            result.append(human + "\n");
+        for (E e: listHumans) {
+            result.append(e + "\n");
         }
         return result.toString();
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return new HumanIterator(listHumans);
     }
 
     public void sortByName() {
-        listHumans.sort(new HumanComparatorByName());
+        listHumans.sort(new HumanComparatorByName<>());
     }
 
     public void sortByAge() {
-        listHumans.sort(new HumanComparatorByAge());
+        listHumans.sort(new HumanComparatorByAge<>());
     }
 
     public void sortById() {
-        listHumans.sort(new HumanComparatorById());
+        listHumans.sort(new HumanComparatorById<>());
     }
 }

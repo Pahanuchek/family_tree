@@ -1,15 +1,14 @@
 package com.github.pahanuchek.family_tree.family_tree;
 
-import com.github.pahanuchek.family_tree.human.Human;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator implements Iterator<Human> {
-    private List<Human> listHumans;
+public class HumanIterator<E> implements Iterator<E> {
+    private List<E> listHumans;
     private int currentId;
 
-    public HumanIterator(List<Human> listHumans) {
+    public HumanIterator(List<E> listHumans) {
         this.listHumans = listHumans;
     }
 
@@ -22,7 +21,7 @@ public class HumanIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public E next() {
         return listHumans.get(currentId++);
     }
 }

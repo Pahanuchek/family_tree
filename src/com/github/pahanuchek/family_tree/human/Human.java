@@ -1,5 +1,7 @@
 package com.github.pahanuchek.family_tree.human;
 
+import com.github.pahanuchek.family_tree.family_tree.ItemUser;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Human implements Serializable {
+public class Human implements Serializable, ItemUser<Human> {
     private  int id;
     private String name;
     private Gender gender;

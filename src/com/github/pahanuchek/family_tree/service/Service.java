@@ -10,12 +10,12 @@ import java.time.LocalDate;
 
 public class Service {
     private HumanBuilder humanBuilder;
-    private FamilyTree familyTree;
+    private FamilyTree<Human> familyTree;
     private FileHandler fileHandler;
 
     public Service() {
         this.humanBuilder = new HumanBuilder();
-        this.familyTree = new FamilyTree();
+        this.familyTree = new FamilyTree<>();
         this.fileHandler = new FileHandler();
     }
 
