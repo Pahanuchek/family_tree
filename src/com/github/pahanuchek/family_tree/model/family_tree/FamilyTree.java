@@ -1,9 +1,8 @@
-package com.github.pahanuchek.family_tree.family_tree;
+package com.github.pahanuchek.family_tree.model.family_tree;
 
-import com.github.pahanuchek.family_tree.human.Human;
-import com.github.pahanuchek.family_tree.human.comparators.HumanComparatorByAge;
-import com.github.pahanuchek.family_tree.human.comparators.HumanComparatorById;
-import com.github.pahanuchek.family_tree.human.comparators.HumanComparatorByName;
+import com.github.pahanuchek.family_tree.model.human.comparators.HumanComparatorByAge;
+import com.github.pahanuchek.family_tree.model.human.comparators.HumanComparatorById;
+import com.github.pahanuchek.family_tree.model.human.comparators.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,9 +22,6 @@ public class FamilyTree<E extends ItemUser<E>> implements Serializable, Iterable
         if (!checkHumanId.contains(e.getId())) {
             checkHumanId.add(e.getId());
             listHumans.add(e);
-            searchAndAddChildrenFather(e);
-            searchAndAddChildrenMother(e);
-            searchAndAddParentChildren(e);
         }
     }
 
@@ -40,25 +36,21 @@ public class FamilyTree<E extends ItemUser<E>> implements Serializable, Iterable
         return null;
     }
 
-    private void searchAndAddChildrenFather(E e) {
-        if (e.getFather() != null) {
-            e.getFather().addChildren(e);
-        }
+    public boolean addFather(E e1, E e2) {
+        boolean result = e1.addFather(e2);
+        return result;
     }
 
-    private void searchAndAddChildrenMother(E e) {
-        if (e.getMother() != null) {
-            e.getMother().addChildren(e);
-        }
+    public boolean addMother(E e1, E e2) {
+        boolean result = e1.addMother(e2);
+        return result;
     }
 
-    private void searchAndAddParentChildren(E e) {
-        if (e.getChildren() != null && e.getChildren().isEmpty()) {
-            for (E child: e.getChildren()) {
-                child.addParents(e);
-            }
-        }
+    public boolean addChildren(E e1, E e2) {
+        boolean result = e1.addChildren(e2);
+        return result;
     }
+
 
     @Override
     public String toString() {
@@ -86,4 +78,5 @@ public class FamilyTree<E extends ItemUser<E>> implements Serializable, Iterable
     public void sortById() {
         listHumans.sort(new HumanComparatorById<>());
     }
+
 }

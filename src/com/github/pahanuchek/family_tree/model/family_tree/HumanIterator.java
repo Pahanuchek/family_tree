@@ -1,4 +1,4 @@
-package com.github.pahanuchek.family_tree.family_tree;
+package com.github.pahanuchek.family_tree.model.family_tree;
 
 
 import java.util.Iterator;

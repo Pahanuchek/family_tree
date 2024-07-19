@@ -1,7 +1,6 @@
-package com.github.pahanuchek.family_tree.human.comparators;
+package com.github.pahanuchek.family_tree.model.human.comparators;
 
-import com.github.pahanuchek.family_tree.family_tree.ItemUser;
-import com.github.pahanuchek.family_tree.human.Human;
+import com.github.pahanuchek.family_tree.model.family_tree.ItemUser;
 
 import java.util.Comparator;
 

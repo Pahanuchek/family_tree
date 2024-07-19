@@ -1,16 +1,18 @@
-package com.github.pahanuchek.family_tree.writer;
+package com.github.pahanuchek.family_tree.model.writer;
 
 import java.io.*;
 
 public class FileHandler implements Writer {
     @Override
-    public void writeDoc(Object object) {
+    public boolean writeDoc(Object object) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream("person.out"));) {
             objectOutputStream.writeObject(object);
+            return true;
         } catch (IOException e) {
             System.out.println(e);
         }
+        return false;
     }
 
         @Override

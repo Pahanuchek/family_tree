@@ -1,4 +1,4 @@
-package com.github.pahanuchek.family_tree.human;
+package com.github.pahanuchek.family_tree.model.human;
 
 import java.io.Serializable;
 

@@ -1,6 +1,6 @@
-package com.github.pahanuchek.family_tree.human;
+package com.github.pahanuchek.family_tree.model.human;
 
-import com.github.pahanuchek.family_tree.family_tree.ItemUser;
+import com.github.pahanuchek.family_tree.model.family_tree.ItemUser;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -19,32 +19,17 @@ public class Human implements Serializable, ItemUser<Human> {
     private Human mother;
     private List<Human> children;
 
-    public Human(int id, String name, Gender gender, LocalDate birthDay, LocalDate deadDay,
-                 Human father, Human mother) {
+    public Human(int id, String name, Gender gender, LocalDate birthDay, LocalDate deadDay) {
         this.id = id;
         this.name = name;
         this.gender = gender;
         this.birthDay = birthDay;
         this.deadDay = deadDay;
-        this.father = father;
-        this.mother = mother;
         this.children = new ArrayList<>();
     }
 
-    public Human(int id, String name, Gender gender, LocalDate birthDay, LocalDate deadDay) {
-        this(id, name, gender, birthDay, deadDay, null, null);
-    }
-
     public Human(int id, String name, Gender gender, LocalDate birthDay) {
-        this(id, name, gender, birthDay, null, null, null);
-    }
-    public Human(int id, String name, Gender gender, LocalDate birthDay, Human parent) {
-        this(id, name, gender, birthDay, null, null, null);
-        addParents(parent);
-    }
-
-    public Human(int id, String name, Gender gender, LocalDate birthDay, Human father, Human mother) {
-        this(id, name, gender, birthDay, null, father, mother);
+        this(id, name, gender, birthDay, null);
     }
 
     public int getId() { return id; }
@@ -53,64 +38,20 @@ public class Human implements Serializable, ItemUser<Human> {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
-    public LocalDate getBirthDay() {
-        return birthDay;
-    }
-
-    public void setBirthDay(LocalDate birthDay) {
-        this.birthDay = birthDay;
-    }
-
-    public LocalDate getDeadDay() {
-        return deadDay;
-    }
-
-    public void setDeadDay(LocalDate deadDay) {
-        this.deadDay = deadDay;
-    }
-
     public Human getFather() {
         return father;
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
     }
 
     public Human getMother() {
         return mother;
     }
 
-    public void setMother(Human mother) {
-        this.mother = mother;
-    }
-
     public List<Human> getChildren() {
         return children;
     }
 
-    public void setChildren(List<Human> children) {
-        this.children = children;
-    }
-
     public boolean addChildren(Human child) {
-        if (child != null) {
-            children.add(child);
-            child.addParents(this);
-            return true;
-        } else {
+        if (!this.children.isEmpty()) {
             for(Human childrenReal: children) {
                 if (childrenReal.equals(child)) {
                     return false;
@@ -118,15 +59,27 @@ public class Human implements Serializable, ItemUser<Human> {
             }
         }
         children.add(child);
+        if (this.gender == Gender.Female) {
+            child.addFather(this);
+        } else if (this.gender == Gender.Male) {
+            child.addMother(this);
+        }
         return true;
     }
 
-    public boolean addParents(Human parent) {
-        if (parent.getGender().equals(Gender.Male) && this.father == null) {
-            this.father = parent;
+    public boolean addFather(Human father) {
+        if (this.father == null) {
+            this.father = father;
+            father.addChildren(this);
             return true;
-        } else if (parent.getGender().equals(Gender.Female) && this.mother == null) {
-            this.mother = parent;
+        }
+        return false;
+    }
+
+    public boolean addMother(Human mother) {
+        if (this.mother == null) {
+            this.mother = mother;
+            mother.addChildren(this);
             return true;
         }
         return false;
