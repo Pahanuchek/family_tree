@@ -1,4 +1,4 @@
-package com.github.pahanuchek.family_tree.view.commands;
+package com.github.pahanuchek.family_tree.view;
 
 public interface Commandable {
     String getDescription();

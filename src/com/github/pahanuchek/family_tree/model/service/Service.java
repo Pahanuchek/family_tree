@@ -7,6 +7,7 @@ import com.github.pahanuchek.family_tree.model.builder.HumanBuilder;
 import com.github.pahanuchek.family_tree.model.writer.FileHandler;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Service {
     private HumanBuilder humanBuilder;
@@ -43,6 +44,7 @@ public class Service {
     public boolean readTreeFromFile() {
         familyTree = (FamilyTree) fileHandler.readDoc();
         if (familyTree != null) {
+            humanBuilder = new HumanBuilder(familyTree.getSize());
             return true;
         }
         return false;
@@ -87,5 +89,23 @@ public class Service {
         Human parent = familyTree.searchHuman(idChildren);
         boolean result = familyTree.addChildren(human, parent);
         return result;
+    }
+
+    public void addHuman(List<String> dataHuman) {
+        String name = dataHuman.get(0);
+        Gender gender;
+        if (dataHuman.get(1).equals("Мужской")) {
+            gender = Gender.Male;
+        } else {
+            gender = Gender.Female;
+        }
+        LocalDate dateBirth = LocalDate.parse(dataHuman.get(2));
+        if (dataHuman.get(3).isEmpty()) {
+            printHuman(createHumanAndAddInTree(name, gender, dateBirth).getId());
+        }
+        else {
+            LocalDate dateDead = LocalDate.parse(dataHuman.get(3));
+            printHuman(createHumanAndAddInTree(name, gender, dateBirth, dateDead).getId());
+        }
     }
 }

@@ -55,7 +55,7 @@ public class FamilyTree<E extends ItemUser<E>> implements Serializable, Iterable
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        result.append("There are " + listHumans.size() + " people in this family tree:\n");
+        result.append("В данном семейном дереве " + listHumans.size() + " человек(а):\n");
         for (E e: listHumans) {
             result.append(e + "\n");
         }
@@ -77,6 +77,10 @@ public class FamilyTree<E extends ItemUser<E>> implements Serializable, Iterable
 
     public void sortById() {
         listHumans.sort(new HumanComparatorById<>());
+    }
+
+    public int getSize() {
+        return listHumans.size();
     }
 
 }

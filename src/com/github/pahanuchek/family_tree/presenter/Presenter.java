@@ -3,6 +3,8 @@ package com.github.pahanuchek.family_tree.presenter;
 import com.github.pahanuchek.family_tree.model.service.Service;
 import com.github.pahanuchek.family_tree.view.View;
 
+import java.util.List;
+
 public class Presenter {
     private Service service;
     private View view;
@@ -27,7 +29,7 @@ public class Presenter {
 
     public void printTree() {
         String answer = service.printTree();
-        view.printAnswer(answer);
+        System.out.println(answer);
     }
 
     public void sortByName() {
@@ -59,6 +61,10 @@ public class Presenter {
 
     public void printHuman(int id) {
         service.printHuman(id);
+    }
+
+    public void addHuman(List<String> dataHuman) {
+        service.addHuman(dataHuman);
     }
 
 }

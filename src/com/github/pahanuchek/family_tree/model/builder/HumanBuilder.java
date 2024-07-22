@@ -8,11 +8,19 @@ import java.time.LocalDate;
 public class HumanBuilder {
     private int checkId;
 
+    public HumanBuilder() {
+        checkId = 0;
+    }
+
+    public HumanBuilder(int id) {
+        checkId = id;
+    }
+
     public Human build(String name, Gender gender, LocalDate birthDay, LocalDate deadDay) {
-        return new Human(checkId++, name, gender, birthDay, deadDay);
+        return new Human(++checkId, name, gender, birthDay, deadDay);
     }
 
     public Human build(String name, Gender gender, LocalDate birthDay) {
-        return new Human(checkId++, name, gender, birthDay);
+        return new Human(++checkId, name, gender, birthDay);
     }
 }

@@ -1,12 +1,12 @@
 package com.github.pahanuchek.family_tree;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import com.github.pahanuchek.family_tree.view.ConsoleUI;
+import com.github.pahanuchek.family_tree.view.View;
 
 public class Main {
     public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
-        System.out.println(list);
+        View view = new ConsoleUI();
+        view.start();
     }
 }

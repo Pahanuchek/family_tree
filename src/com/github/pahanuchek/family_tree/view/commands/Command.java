@@ -1,5 +1,6 @@
 package com.github.pahanuchek.family_tree.view.commands;
 
+import com.github.pahanuchek.family_tree.view.Commandable;
 import com.github.pahanuchek.family_tree.view.ConsoleUI;
 
 public abstract class Command implements Commandable {
@@ -11,7 +12,7 @@ public abstract class Command implements Commandable {
         this.description = description;
     }
 
-    ConsoleUI getConsoleUI() {
+    public ConsoleUI getConsoleUI() {
         return consoleUI;
     }
 

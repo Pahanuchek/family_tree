@@ -109,21 +109,21 @@ public class Human implements Serializable, ItemUser<Human> {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        result.append("Id: " + id + ". ");
-        result.append("My name is " + this.name + ". ");
-        result.append("I'm " + this.getAge() + " years old. ");
+        result.append("№: " + id + ". ");
+        result.append("Меня зовут " + this.name + ". ");
+        result.append("Мне " + this.getAge() + " лет. ");
         if (this.father == null && this.mother != null) {
-            result.append("My mother's name is " + mother.getName() + ". ");
+            result.append("Мою маму зовут " + mother.getName() + ". ");
         } else if (this.father != null && this.mother == null) {
-            result.append("My dad's name is " + father.getName() + ". ");
+            result.append("Моего папу зовут " + father.getName() + ". ");
         } else if (this.father != null && this.mother != null) {
-            result.append("My parent's names are " + father.getName() + " dad and " + mother.getName() + " mom. ");
+            result.append("Моих родителей зовут: " + father.getName() + " - папа, " + mother.getName() + " мама. ");
         }
         if (children != null && !children.isEmpty()) {
             if (children.size() == 1) {
-                result.append("My children name is " + children.get(0).getName() + ". ");
+                result.append("Моего ребенка зовут " + children.get(0).getName() + ". ");
             } else {
-                result.append("My children's names are ");
+                result.append("Моих детей зовут ");
                 for (Human child : children) {
                     if (child.equals(children.get(children.size() - 1))) {
                         result.append(child.getName() + ". ");
