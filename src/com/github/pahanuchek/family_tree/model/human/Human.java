@@ -59,9 +59,9 @@ public class Human implements Serializable, ItemUser<Human> {
             }
         }
         children.add(child);
-        if (this.gender == Gender.Female) {
+        if (this.gender == Gender.Male) {
             child.addFather(this);
-        } else if (this.gender == Gender.Male) {
+        } else if (this.gender == Gender.Female) {
             child.addMother(this);
         }
         return true;

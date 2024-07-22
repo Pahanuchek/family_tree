@@ -100,7 +100,7 @@ public class Service {
             gender = Gender.Female;
         }
         LocalDate dateBirth = LocalDate.parse(dataHuman.get(2));
-        if (dataHuman.get(3).isEmpty()) {
+        if (dataHuman.get(3) == null) {
             printHuman(createHumanAndAddInTree(name, gender, dateBirth).getId());
         }
         else {

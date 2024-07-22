@@ -34,4 +34,8 @@ public class GenderMenu {
 
     public void executeMenu(int current) {
     }
+
+    public int getSize() {
+        return listGender.size();
+    }
 }

@@ -7,10 +7,8 @@ import java.util.List;
 
 public class Presenter {
     private Service service;
-    private View view;
 
     public Presenter(View view) {
-        this.view = view;
         service = new Service();
     }
 

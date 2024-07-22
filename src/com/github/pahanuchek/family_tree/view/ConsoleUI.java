@@ -31,14 +31,15 @@ public class ConsoleUI implements View {
     public void start() {
         while (flagStartStop) {
             System.out.println(mainMenu.getMenuConsole());
-            if (scanner.hasNextInt()) {
-                int current = scanner.nextInt();
+            try {
+                int current = Integer.parseInt(scanner.nextLine());
                 if (current >= 1 && current <= mainMenu.getSize()) {
                     mainMenu.executeMenu(current);
+                } else {
+                    System.out.println("Неккоректно выбран пункт!");
                 }
-            } else {
+            } catch (NumberFormatException e) {
                 System.out.println("Неккоректно выбран пункт!");
-                scanner.nextLine();
             }
         }
     }
@@ -50,27 +51,38 @@ public class ConsoleUI implements View {
 
     public void searchHuman() {
         System.out.println("Введите идентификатор человека: ");
-        if (scanner.hasNextInt()) {
-            int id = scanner.nextInt();
+        try {
+            int id = Integer.parseInt(scanner.nextLine());
             presenter.printHuman(id);
+        } catch (NumberFormatException  e) {
+            System.out.println("Некорректно введен идентификатор!");
+        } catch (NullPointerException e2) {
+            System.out.println("Данные человек отсутствует в списке!");
         }
     }
 
     public void addHuman() {
         List<String> dataHuman = new ArrayList<>();
-        System.out.print("Введите имя: ");
-        scanner.nextLine();
-        String name = scanner.nextLine();
+
+        String name = getName();
+        if (name.isEmpty()) {
+            return;
+        }
         dataHuman.add(name);
-        System.out.println(genderMenu.getMenuConsole());
-        String gender = genderMenu.getListGender().get(Integer.parseInt(scanner.nextLine()) - 1).getDescription();
+
+        String gender = getGender();
+        if (gender.isEmpty()) {
+            return;
+        }
         dataHuman.add(gender);
+
         System.out.println("Введите дату рождения");
         String dateBirthDay = getDate();
-        if (dateBirthDay.equals("")) {
+        if (dateBirthDay == null) {
             return;
         }
         dataHuman.add(dateBirthDay);
+
         System.out.println("\nВведите дату смерти, если ее нет введите 0:");
         String dateDeadDay = getDate();
         dataHuman.add(dateDeadDay);
@@ -112,16 +124,20 @@ public class ConsoleUI implements View {
         printAnswer();
         System.out.println("Введите идентификатор человека, которому хотите добавить отца," +
                 " и идентификатор отца через пробел: ");
-        String strId = scanner.nextLine();
-        List<String> listId = new ArrayList<>();
-        listId = Arrays.asList(strId.split(" "));
-        int idHuman = Integer.parseInt(listId.get(0));
-        int idFather = Integer.parseInt(listId.get(1));
-        boolean result = presenter.addFather(idHuman, idFather);
-        if (result) {
-            presenter.searchHuman(idHuman);
-        } else {
-            System.out.println("У данного человека уже есть отец");
+        try {
+            String strId = scanner.nextLine();
+            List<String> listId = new ArrayList<>();
+            listId = Arrays.asList(strId.split(" "));
+            int idHuman = Integer.parseInt(listId.get(0));
+            int idFather = Integer.parseInt(listId.get(1));
+            boolean result = presenter.addFather(idHuman, idFather);
+            if (result) {
+                presenter.searchHuman(idHuman);
+            } else {
+                System.out.println("У данного человека уже есть отец");
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Данные люди отсутствуют в дереве!");
         }
 
     }
@@ -130,16 +146,20 @@ public class ConsoleUI implements View {
         printAnswer();
         System.out.println("Введите идентификатор человека, которому хотите добавить маму," +
                 " и идентификатор мамы через пробел: ");
-        String strId = scanner.nextLine();
-        List<String> listId = new ArrayList<>();
-        listId = Arrays.asList(strId.split(" "));
-        int idHuman = Integer.parseInt(listId.get(0));
-        int idMother = Integer.parseInt(listId.get(1));
-        boolean result = presenter.addMother(idHuman, idMother);
-        if (result) {
-            presenter.searchHuman(idHuman);
-        } else {
-            System.out.println("У данного человека уже есть мама");
+        try {
+            String strId = scanner.nextLine();
+            List<String> listId = new ArrayList<>();
+            listId = Arrays.asList(strId.split(" "));
+            int idHuman = Integer.parseInt(listId.get(0));
+            int idMother = Integer.parseInt(listId.get(1));
+            boolean result = presenter.addMother(idHuman, idMother);
+            if (result) {
+                presenter.searchHuman(idHuman);
+            } else {
+                System.out.println("У данного человека уже есть мама");
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Данные люди отсутствуют в дереве!");
         }
 
     }
@@ -148,72 +168,114 @@ public class ConsoleUI implements View {
         printAnswer();
         System.out.println("Введите идентификатор родителя, которому хотите добавить ребенка," +
                 " и идентификатор родителя через пробел: ");
-        String strId = scanner.nextLine();
-        List<String> listId = new ArrayList<>();
-        listId = Arrays.asList(strId.split(" "));
-        int idHuman = Integer.parseInt(listId.get(0));
-        int idChildren = Integer.parseInt(listId.get(1));
-        boolean result = presenter.addChildren(idHuman, idChildren);
-        if (result) {
-            presenter.searchHuman(idHuman);
-        } else {
-            System.out.println("Ребенок уже добавлен");
+        try {
+            String strId = scanner.nextLine();
+            List<String> listId = new ArrayList<>();
+            listId = Arrays.asList(strId.split(" "));
+            int idHuman = Integer.parseInt(listId.get(0));
+            int idChildren = Integer.parseInt(listId.get(1));
+            boolean result = presenter.addChildren(idHuman, idChildren);
+            if (result) {
+                presenter.searchHuman(idHuman);
+            } else {
+                System.out.println("Ребенок уже добавлен");
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Данные люди отсутствуют в дереве!");
         }
 
+    }
+    public Integer isDigit() {
+        try {
+            String yearStr = scanner.nextLine();
+            Integer year = Integer.parseInt(yearStr);
+            return year;
+        } catch (NullPointerException | NumberFormatException e) {
+            System.out.println("Введено некорректное значение");
+            return null;
+        }
+    }
+
+    public Integer getYear() {
+        try {
+            System.out.print("Введите год: ");
+            Integer year = isDigit();
+            if (year == 0) {
+                return null;
+            }
+            if (year > 1000 && year < LocalDate.now().getYear() + 1) {
+                return year;
+            } else {
+                System.out.println("Введен не существующий год!");
+            }
+        } catch (NullPointerException e) {;
+        }
+        return null;
+    }
+    public String getMonth() {
+        try {
+            System.out.print("Введите месяц: ");
+            Integer month = isDigit();
+            if (month == 0) {
+                return null;
+            }
+            if (month >= 1 && month <= 12) {
+                if (month < 10) {
+                    return "0" + month;
+                } else {
+                    return month + "";
+                }
+            } else {
+                System.out.println("Такого месяца не существует!");
+            }
+        } catch (NullPointerException e) {
+        }
+        return null;
+    }
+
+    public String getDay() {
+        try {
+            System.out.print("Введите день: ");
+            Integer day = isDigit();
+            if (day == 0) {
+                return null;
+            }
+            if (day >= 1 && day <= 31) {
+                if (day < 10) {
+                    return "0" + day;
+                } else {
+                    return day + "";
+                }
+            } else {
+                System.out.println("Такого месяца не существует!");
+            }
+            } catch(NullPointerException e) {
+            }
+            return null;
     }
 
     public String getDate() {
         StringBuilder stringBuilder = new StringBuilder();
-        System.out.print("Введите год: ");
-        if (scanner.hasNextInt()) {
-            int year = scanner.nextInt();
-            if (year == 0) {
-                return "";
-            }
-            if (year > 1000 && year < LocalDate.now().getYear() + 1) {
-                stringBuilder.append(year + "-");
-            }
-            else {
-                System.out.println("Введен не существующий год!");
-                return "";
-            }
+
+        Integer year = getYear();
+        if (year == null) {
+            return null;
         } else {
-             System.out.println("Ввден некорректный год!");
-            return "";
+            stringBuilder.append(year + "-");
         }
-        System.out.print("Введите месяц: ");
-        if (scanner.hasNextInt()) {
-            int month = scanner.nextInt();
-            if (month >= 1 && month <= 12) {
-                if (month < 10) {
-                    stringBuilder.append("0" + month + "-");
-                } else {
-                    stringBuilder.append(month + "-");
-                }
-            } else {
-                System.out.println("Такого месяца не существует!");
-                return "";
-            }
-        }  else {
-            System.out.println("Неккоректный ввод числового значения месяца!");
-            return "";
+
+        String month = getMonth();
+        if (month == null) {
+            return null;
+        } else {
+            stringBuilder.append(month + "-");
         }
-        System.out.print("Введите день: ");
-        if (scanner.hasNextInt()) {
-            int day = scanner.nextInt();
-            if (day >= 1 && day <= 31) {
-                if (day < 10) {
-                    stringBuilder.append("0" + day);
-                } else {
-                    stringBuilder.append(day);
-                }
-            } else {
-                System.out.println("Такого месяца не существует!");
-                return "";
-            }
-        }  else {
-            System.out.println("Неккоректный ввод числового значения месяца!");
-            return "";
+
+        String day = getDay();
+        if (day == null) {
+            return null;
+        } else {
+            stringBuilder.append(day);
         }
 
         return stringBuilder.toString();
@@ -222,5 +284,33 @@ public class ConsoleUI implements View {
     public void finish() {
         flagStartStop = false;
         scanner.close();
+    }
+
+    public String getName() {
+        System.out.print("Введите имя: ");
+        scanner.nextLine();
+        String name = scanner.nextLine();
+        if (name.isEmpty()) {
+            System.out.println("Вы ввели пустое имя!");
+        }
+        return name;
+    }
+
+    public  String getGender() {
+        System.out.println(genderMenu.getMenuConsole());
+        String gender;
+        String currentStr = scanner.nextLine();
+        if (currentStr.isEmpty()) {
+            System.out.println("Неправильно выбран пункт");
+            return null;
+        }
+        int current = Integer.parseInt(currentStr);
+        if (current > 0 && current <= genderMenu.getSize()) {
+            gender = genderMenu.getListGender().get(current - 1).getDescription();
+        } else {
+            System.out.println("Неправильно выбран пункт");
+            return null;
+        }
+        return gender;
     }
 }
