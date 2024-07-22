@@ -288,7 +288,6 @@ public class ConsoleUI implements View {
 
     public String getName() {
         System.out.print("Введите имя: ");
-        scanner.nextLine();
         String name = scanner.nextLine();
         if (name.isEmpty()) {
             System.out.println("Вы ввели пустое имя!");
