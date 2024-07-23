@@ -10,6 +10,6 @@ public class SortHumanById extends Command {
 
     @Override
     public void execute() {
-        getConsoleUI().sortById();
+        getConsoleUI().getMainMenuService().sortById();
     }
 }

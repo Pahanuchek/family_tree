@@ -10,6 +10,6 @@ public class WriteData extends Command {
 
     @Override
     public void execute() {
-        getConsoleUI().writeTreeToFile();
+        getConsoleUI().getMainMenuService().writeTreeToFile();
     }
 }

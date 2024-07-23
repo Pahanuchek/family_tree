@@ -10,6 +10,6 @@ public class AddChildren extends Command {
 
     @Override
     public void execute() {
-        getConsoleUI().addChildren();
+        getConsoleUI().getMainMenuService().addChildren();
     }
 }

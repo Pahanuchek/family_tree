@@ -10,6 +10,6 @@ public class SearchHuman extends Command {
 
     @Override
     public void execute() {
-        getConsoleUI().searchHuman();
+        getConsoleUI().getMainMenuService().searchHuman();
     }
 }

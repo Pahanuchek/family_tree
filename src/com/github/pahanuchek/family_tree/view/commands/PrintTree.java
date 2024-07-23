@@ -10,6 +10,6 @@ public class PrintTree extends Command {
 
     @Override
     public void execute() {
-        getConsoleUI().printAnswer();
+        getConsoleUI().getMainMenuService().printTree();
     }
 }

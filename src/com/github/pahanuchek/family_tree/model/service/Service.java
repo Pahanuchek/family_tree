@@ -5,6 +5,7 @@ import com.github.pahanuchek.family_tree.model.human.Gender;
 import com.github.pahanuchek.family_tree.model.human.Human;
 import com.github.pahanuchek.family_tree.model.builder.HumanBuilder;
 import com.github.pahanuchek.family_tree.model.writer.FileHandler;
+import com.github.pahanuchek.family_tree.model.writer.Writer;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 public class Service {
     private HumanBuilder humanBuilder;
     private FamilyTree<Human> familyTree;
-    private FileHandler fileHandler;
+    private Writer fileHandler;
 
     public Service() {
         this.humanBuilder = new HumanBuilder();
@@ -76,12 +77,12 @@ public class Service {
     public boolean addMother(int idHuman, int idMother) {
         Human human = familyTree.searchHuman(idHuman);
         Human parent = familyTree.searchHuman(idMother);
-        boolean result = familyTree.addFather(human, parent);
+        boolean result = familyTree.addMother(human, parent);
         return  result;
     }
 
-    public void printHuman(int idHuman) {
-        System.out.println(searchHumanInTree(idHuman));
+    public String printHuman(int idHuman) {
+        return searchHumanInTree(idHuman).toString();
     }
 
     public boolean addChildren(int idHuman, int idChildren) {

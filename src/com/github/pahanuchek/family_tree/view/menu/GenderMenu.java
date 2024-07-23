@@ -1,5 +1,7 @@
-package com.github.pahanuchek.family_tree.view;
+package com.github.pahanuchek.family_tree.view.menu;
 
+import com.github.pahanuchek.family_tree.view.Commandable;
+import com.github.pahanuchek.family_tree.view.ConsoleUI;
 import com.github.pahanuchek.family_tree.view.gender_commands.GenbderMaleCommand;
 import com.github.pahanuchek.family_tree.view.gender_commands.GenderFemaleCommand;
 

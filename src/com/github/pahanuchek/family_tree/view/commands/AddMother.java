@@ -10,6 +10,6 @@ public class AddMother extends Command {
 
     @Override
     public void execute() {
-        getConsoleUI().addMother();
+        getConsoleUI().getMainMenuService().addMother();
     }
 }

@@ -7,8 +7,10 @@ import java.util.List;
 
 public class Presenter {
     private Service service;
+    private View view;
 
     public Presenter(View view) {
+        this.view = view;
         service = new Service();
     }
 
@@ -27,7 +29,7 @@ public class Presenter {
 
     public void printTree() {
         String answer = service.printTree();
-        System.out.println(answer);
+        view.printAnswer(answer);
     }
 
     public void sortByName() {
@@ -58,7 +60,8 @@ public class Presenter {
     }
 
     public void printHuman(int id) {
-        service.printHuman(id);
+        String result = service.printHuman(id);
+        view.printAnswer(result);
     }
 
     public void addHuman(List<String> dataHuman) {

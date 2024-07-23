@@ -10,6 +10,6 @@ public class AddFather extends Command {
 
     @Override
     public void execute() {
-        getConsoleUI().addFather();
+        getConsoleUI().getMainMenuService().addFather();
     }
 }

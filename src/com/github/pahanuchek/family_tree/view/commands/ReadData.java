@@ -10,6 +10,6 @@ public class ReadData extends Command {
 
     @Override
     public void execute() {
-        getConsoleUI().readTreeInFile();
+        getConsoleUI().getMainMenuService().readTreeInFile();
     }
 }
